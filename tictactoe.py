@@ -3,7 +3,14 @@ def printoutGrid():
     for x in grid.values():
         fields.append(x)
     print(gridString.format(*fields))
-
+def checkWinner():
+    winner = False
+    possibleCombinations = [("1", "2", "3"), ("4", "5", "6",), ("7", "8", "9"), ("1", "4", "7"), ("2", "5", "8"), ("3", "6", "9"), ("1", "5", "9"), ("3", "5", "7")]
+    for i in possibleCombinations:
+        if grid[i[0]] == grid[i[1]] and grid[i[1]] == grid[i[2]]:
+            winner = True
+    
+    return winner
 grid = {
     "1": "1",
     "2": "2",
@@ -22,6 +29,7 @@ gridString = """
 | {} | {} | {}
     """
 legalMoves = True
+winner = False
 def checkIfLegal(nm):
     if nm >= 9 or nm < 0: 
         return False
@@ -34,7 +42,7 @@ def playerTurn():
     legal = True
     while(legal):
         if player == 1: 
-            field = input("{}, chose number beetween 1-9:".format(player1Name))
+            field = input("{}, chose number beetween 1-9: ".format(player1Name))
             while True:
                 try: 
                     intField = int(field)
@@ -48,14 +56,13 @@ def playerTurn():
                 while(intField <= 0 and intField > 9):
                     field = input("{}, you must chose number beetween 1-9: ".format(player1Name))
                 if (intField > 0 and intField <= 9):
-                    print("Here")
                     if player == 1:
                         while(grid[field] == "X" or grid[field] == "O"):
                             try:
-                                field = input("{}, please chose another number beetween 1-9: that one is already used:".format(player1Name))
+                                field = input("{}, please chose another number beetween 1-9: that one is already used: ".format(player1Name))
                                 grid[field]
                             except:
-                                field = input("{}, please chose another number beetween 1-9: that one is already used:".format(player1Name))
+                                field = input("{}, please chose another number beetween 1-9: that one is already used: ".format(player1Name))
                     allGood = False
                 else:
                     allGood = False
@@ -64,10 +71,14 @@ def playerTurn():
             player = 2
             movesMade = movesMade + 1
             legal = checkIfLegal(movesMade)
+            winner = checkWinner()
             printoutGrid()
+            if winner:
+                print("And the winner is: {} ".format(player1Name))
+                break
         
         if player == 2:
-            field = input("{}, chose number beetween 1-9:".format(player2Name))
+            field = input("{}, chose number beetween 1-9: ".format(player2Name))
             while True:
                 try: 
                     intField = int(field)
@@ -81,14 +92,13 @@ def playerTurn():
                 while(intField <= 0 and intField > 9):
                     field = input("{}, you must chose number beetween 1-9: ".format(player2Name))
                 if (intField > 0 and intField <= 9):
-                    print("Here")
                     if player == 2:
                         while(grid[field] == "O" or grid[field] == "X"):
                             try:
-                                field = input("{}, please chose another number beetween 1-9: that one is already used:".format(player2Name))
+                                field = input("{}, please chose another number beetween 1-9: that one is already used: ".format(player2Name))
                                 grid[field]
                             except:
-                                field = input("{}, please chose another number beetween 1-9: that one is already used:".format(player2Name))
+                                field = input("{}, please chose another number beetween 1-9: that one is already used: ".format(player2Name))
                     allGood = False
                 else:
                     allGood = False
@@ -97,8 +107,15 @@ def playerTurn():
             player = 1
             movesMade = movesMade + 1
             legal = checkIfLegal(movesMade)
+            winner = checkWinner()
             printoutGrid()
+            if winner:
+                print("And the winner is: {} ".format(player2Name))
+                break
 
+    
+
+    
 
     
 
@@ -109,7 +126,7 @@ print("\nTo play select number you wish to replace with your simbol!")
 player1Name = ""
 player2Name = ""
 
-player1Name = input("Player 1 name:")
-player2Name = input("Player 2 name:")
+player1Name = input("Player 1 name: ")
+player2Name = input("Player 2 name: ")
 
 playerTurn()
