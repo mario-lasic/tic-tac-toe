@@ -28,7 +28,7 @@ gridString = """
 | {} | {} | {}
 | {} | {} | {}
     """
-legalMoves = True
+legalMoves = bool
 winner = False
 def checkIfLegal(nm):
     if nm >= 9 or nm < 0: 
@@ -36,10 +36,11 @@ def checkIfLegal(nm):
     else:
         return True
 def playerTurn():
-    movesMade = 1
+    movesMade = 0
     intField = int
     player = 1
     legal = True
+    printoutGrid()
     while(legal):
         if player == 1: 
             field = input("{}, chose number beetween 1-9: ".format(player1Name))
@@ -71,10 +72,14 @@ def playerTurn():
             player = 2
             movesMade = movesMade + 1
             legal = checkIfLegal(movesMade)
+            legalMoves = legal
             winner = checkWinner()
             printoutGrid()
             if winner:
                 print("And the winner is: {} ".format(player1Name))
+                break
+            if not legal:
+                print("It is a Draw!")
                 break
         
         if player == 2:
@@ -107,26 +112,23 @@ def playerTurn():
             player = 1
             movesMade = movesMade + 1
             legal = checkIfLegal(movesMade)
+            legalMoves = legal
             winner = checkWinner()
             printoutGrid()
             if winner:
                 print("And the winner is: {} ".format(player2Name))
                 break
-
-    
-
-    
-
-    
-
+            if not legal:
+                print("It is a Draw!")
+                break
 
 print("WELCOME TO GAME OF TIC-TAC-TOE!")
-print("\nTo play select number you wish to replace with your simbol!")
+print("\nTo play select number you wish to replace with your simbol!\n")
 
 player1Name = ""
 player2Name = ""
 
-player1Name = input("Player 1 name: ")
-player2Name = input("Player 2 name: ")
+player1Name = input("\nPlayer 1 name: ")
+player2Name = input("\nPlayer 2 name: ")
 
 playerTurn()
