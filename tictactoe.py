@@ -23,6 +23,26 @@ gridString = """
     """
 player = 1
 legalMoves = True
+movesMade = 0
+def checkIfLegal(nm):
+    if nm > 9 or nm < 0: 
+        return False
+    else:
+        return True
+def playerTurn(pn):
+    legal = True
+    while(legal):
+        if player == 1: 
+            field = input("{}, chose number beetween 1-9:".format(player1Name))
+            if int(field) > 0 and int(field) < 10:
+                grid[field] = "X"
+                player = 2
+                movesMade +1
+                checkIfLegal(movesMade)
+                printoutGrid()
+
+    
+
 
 print("WELCOME TO GAME OF TIC-TAC-TOE!")
 print("\nTo play select number you wish to replace with your simbol!")
@@ -32,25 +52,3 @@ player2Name = ""
 
 player1Name = input("Player 1 name:")
 player2Name = input("Player 2 name:")
-
-while legalMoves:
-    movesMade = 0
-    if player == 1: 
-        field = input("{}, chose number beetween 1-9:".format(player1Name))
-        if int(field) > 0 and int(field) < 10:
-            grid[field] = "X"
-            player = 2
-            movesMade +1
-            printoutGrid()
-        else:
-            while True:
-                field = input("{}, number must be beetween 1-9:".format(player1Name))
-                if int(field) > 0 and int(field) < 10:
-                    grid[field] = "X"
-                    player = 2
-                    movesMade +1
-                    printoutGrid()
-                    break
-    break           
-    
-    
