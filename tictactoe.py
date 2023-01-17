@@ -174,9 +174,13 @@ player2Name = input("\nPlayer 2 name: ")
 
 playerTurn()
 playAgain = input("Do you wanna play again Y/N: ")
-print(playAgain.lower())
-if (playAgain.lower() == "y"):
-    print("Here we go again!")
-    grid = gridholder
-    playerTurn()
+while not playAgain.lower() == "n":
+    print(playAgain.lower())
+    if (playAgain.lower() == "y"):
+        print("Here we go again!")
+        grid = gridholder
+        playerTurn()
+        playAgain = input("Do you wanna play again Y/N: ")
+    else:
+        playAgain = input("Do you wanna play again Y/N: ")
 
