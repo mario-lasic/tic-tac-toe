@@ -26,7 +26,17 @@ grid = {
     "8": "8",
     "9": "9",
 }
-
+gridholder = {
+    "1": "1",
+    "2": "2",
+    "3": "3",
+    "4": "4",
+    "5": "5",
+    "6": "6",
+    "7": "7",
+    "8": "8",
+    "9": "9",
+}
 gridString = """
 | {} | {} | {}
 | {} | {} | {}
@@ -34,6 +44,8 @@ gridString = """
     """
 legalMoves = bool
 winner = False
+repeat = True
+playAgain = ""
 def checkIfLegal(nm):
     if nm >= 9 or nm < 0: 
         return False
@@ -161,3 +173,10 @@ player1Name = input("\nPlayer 1 name: ")
 player2Name = input("\nPlayer 2 name: ")
 
 playerTurn()
+playAgain = input("Do you wanna play again Y/N: ")
+print(playAgain.lower())
+if (playAgain.lower() == "y"):
+    print("Here we go again!")
+    grid = gridholder
+    playerTurn()
+
