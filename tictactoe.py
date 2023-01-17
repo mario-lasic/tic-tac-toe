@@ -23,7 +23,7 @@ gridString = """
     """
 legalMoves = True
 def checkIfLegal(nm):
-    if nm > 9 or nm < 0: 
+    if nm >= 9 or nm < 0: 
         return False
     else:
         return True
@@ -50,7 +50,7 @@ def playerTurn():
                 if (intField > 0 and intField <= 9):
                     print("Here")
                     if player == 1:
-                        while(grid[field] == "X"):
+                        while(grid[field] == "X" or grid[field] == "O"):
                             try:
                                 field = input("{}, please chose another number beetween 1-9: that one is already used:".format(player1Name))
                                 grid[field]
@@ -61,10 +61,44 @@ def playerTurn():
                     allGood = False
 
             grid[field] = "X"
-            #player = 2
+            player = 2
             movesMade = movesMade + 1
             legal = checkIfLegal(movesMade)
             printoutGrid()
+        
+        if player == 2:
+            field = input("{}, chose number beetween 1-9:".format(player2Name))
+            while True:
+                try: 
+                    intField = int(field)
+                    break
+                except ValueError:
+                    field = input("{}, You must chose beetween 1-9: ".format(player2Name))
+            
+            print(intField)
+            allGood = True
+            while(allGood):
+                while(intField <= 0 and intField > 9):
+                    field = input("{}, you must chose number beetween 1-9: ".format(player2Name))
+                if (intField > 0 and intField <= 9):
+                    print("Here")
+                    if player == 2:
+                        while(grid[field] == "O" or grid[field] == "X"):
+                            try:
+                                field = input("{}, please chose another number beetween 1-9: that one is already used:".format(player2Name))
+                                grid[field]
+                            except:
+                                field = input("{}, please chose another number beetween 1-9: that one is already used:".format(player2Name))
+                    allGood = False
+                else:
+                    allGood = False
+
+            grid[field] = "O"
+            player = 1
+            movesMade = movesMade + 1
+            legal = checkIfLegal(movesMade)
+            printoutGrid()
+
 
     
 
